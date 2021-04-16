@@ -5,6 +5,8 @@ let logRead = document.querySelector('#log-read-span');
 let logNotRead = document.querySelector('#log-not-read-span');
 let countBooks = 0;
 let countRead = 0;
+//DROPDOWN
+const dropOptions = document.querySelectorAll('.dropdown-option');
 //Library
 let library = document.querySelector('#library');
 let booksToggle =document.querySelectorAll('.label-book-toggle-switch');
@@ -29,14 +31,15 @@ colorStars(ratingStars);
 let currentTitle="";
 let currentAuthor="";
 let currentHasRead=false;
-let currentRating=1;
+let currentRating=0; //JUST CHANGED
 let currentBook;
 //LIBRARY
 let myLibrary = [
 ];
-
 //CURRENT INDEX
 let myIndex=0;
+
+
 
 //BOOK CONSTRUCTOR
 function Book(index,title,author,read,rating) {
@@ -198,6 +201,7 @@ function colorStars (myStars){
   });
 }
 
+
 //UPDATE LOG
 function updateLog(){
   logBook.textContent=countBooks.toString();
@@ -205,7 +209,37 @@ function updateLog(){
   logNotRead.textContent=(countBooks-countRead).toString();
 }
 
-
+//DROPDOWN (ORDER)
+dropOptions.forEach((option) => {
+  option.addEventListener('click', () => {
+    let orderType = option.getAttribute("data-drop");
+    orderBooks(orderType);
+  });
+});
+function orderBooks (orderType){
+  console.log("ordering books by: "+orderType);
+  if (orderType=="date" || orderType=="rating"){
+    for (let i in myLibrary){
+      let book =myLibrary[i];
+      let divBook = document.querySelector(`[data-book='${book.index.toString()}']`);
+      if (orderType=="date"){
+        divBook.style.order =`${book.index}`;
+        console.log("book index ",book.index);
+      }
+      else if (orderType=="rating"){
+        divBook.style.order =`${5-book.rating}`;
+      }
+    }
+  }
+  else if (orderType=="alphabetical"){
+    const orderedLibrary= myLibrary.sort((a,b)=> a.title.localeCompare(b.title));
+    for (let i in orderedLibrary){
+      let book =orderedLibrary[i];
+      let divBook = document.querySelector(`[data-book='${book.index.toString()}']`);
+      divBook.style.order =`${i}`;
+    }
+  }
+}
 
 
 //ADD BOOK TO HTML
