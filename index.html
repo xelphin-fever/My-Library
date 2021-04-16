@@ -10,7 +10,9 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 </head>
 <body>
+    <!--DIV GENERAL-->
     <div id="div-general">
+        <!--DIV TOP-->
         <div id="div-top">
             <!--LOG-->
             <div id="div-log">
@@ -20,20 +22,24 @@
             </div>
             <!--TITLE-->
             <div id="div-mainTitle"><h1 id="mainTitle">My Library</h1></div>
-            <!--DROPDOWN-->
-            <div  id="div-dropdown" class="dropdown">
-                <button class="dropbtn">Order By:</button>
-                <div class="dropdown-content">
-                    <h2 class="dropdown-option" data-drop="rating">Rating</h2>
-                    <h2 class="dropdown-option" data-drop="alphabetical">Alphabetical</h2>
-                    <h2 class="dropdown-option" data-drop="date">Date</h2>
+            <!--DIV RIGHT TOP-->
+            <div id="div-right-top">
+                <!--Read / Not-Read-->
+                <button class="btn-top-right" data-read="read">Read</button>
+                <button class="btn-top-right" data-read="not-read">Not Read</button>
+                <!--DROPDOWN-->
+                <div  id="div-dropdown" class="dropdown">
+                    <button class="dropbtn">Order By:</button>
+                    <div class="dropdown-content">
+                        <h2 class="dropdown-option" data-drop="rating">Rating</h2>
+                        <h2 class="dropdown-option" data-drop="author">Author</h2>
+                        <h2 class="dropdown-option" data-drop="title">Title</h2>
+                        <h2 class="dropdown-option" data-drop="date">Date</h2>
+                    </div>
                 </div>
             </div>
-
-
         </div>
-        
-        <!--LIBRARY-->
+       <!--LIBRARY-->
         <div id="library">
         </div>        
     </div>
@@ -41,10 +47,10 @@
     <form name="myForm" id="div-book-form" action="" method="" style="visibility:hidden;" autocomplete="off">
         <h2 id="formTitle">Add New Book</h2>
         <div class="div-form-book-part div-form-book-title">
-            <input type="text" name="title" class="inp-book" id="inp-book-title" placeholder="Title" required>
+            <input type="text" name="title" class="inp-book" id="inp-book-title" placeholder="Title"  maxlength="28"required>
         </div>
         <div class="div-form-book-part div-form-book-author">
-            <input type="text" name="author" class="inp-book" id="inp-book-author" placeholder="Author" required>
+            <input type="text" name="author" class="inp-book" id="inp-book-author" placeholder="Author" maxlength="22" required>
         </div>
         <div class="div-form-book-part div-form-book-read">
             <h3 id="label-read">Read?</h3>

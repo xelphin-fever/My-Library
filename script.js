@@ -1,5 +1,5 @@
 //VARIABLES
-//Log
+//LOG
 let logBook = document.querySelector('#log-books-span');
 let logRead = document.querySelector('#log-read-span');
 let logNotRead = document.querySelector('#log-not-read-span');
@@ -7,20 +7,24 @@ let countBooks = 0;
 let countRead = 0;
 //DROPDOWN
 const dropOptions = document.querySelectorAll('.dropdown-option');
-//Library
+//READ/NOT-READ BUTTONS
+const readButtons = document.querySelectorAll('.btn-top-right');
+let showRead = true;
+let showNotRead =true;
+//LIBRARY
 let library = document.querySelector('#library');
 let booksToggle =document.querySelectorAll('.label-book-toggle-switch');
 let booksDelete =document.querySelectorAll('.book-btnDelete');
 let myBooks = document.querySelectorAll('.div-book');
-//Form
+//FORM
 const form = document.querySelector('#div-book-form');
 const btnSubmit = document.querySelector('#btn-submit');
 const checkRead = document.querySelector('#inp-book-read');
 const divStars = document.querySelector('.div-form-book-stars');
 const stars = document.querySelectorAll('.form-star ');
-//Add Button
+//ADD BUTTON
 const btnAdd = document.querySelector('#btn-add');
-//Rating Form
+//RATING FORM
 const ratingForm = document.querySelector('#div-rating');
 const ratingStars = document.querySelectorAll('.rating-star');
 const ratingSubmit = document.querySelector('#rating-submit');
@@ -103,7 +107,6 @@ function flipRead (myBook) {
   updateLog();
   console.log("updated ",myLibrary)
 }
-
 //Toggle Clicked
 function changeRead(event){
   let bookPosition=Number(event.target.getAttribute('data-toggle'));
@@ -111,7 +114,7 @@ function changeRead(event){
   currentBook= myLibrary[bookPosition];
   console.log("changed read  of "+bookPosition+" to: ",myLibrary[Number(bookPosition)].read);
 }
-//If Unread -> Read, then ask Rating
+//If Unread -> Read: then ask Rating
 let askedRating=1;
 function askRating (){
   ratingForm.style.visibility="visible";
@@ -128,7 +131,7 @@ ratingSubmit.addEventListener("click",() =>{
 //UPDATE SINGLE BOOK
 function updateBook(currentBook){
   let position= currentBook.index.toString();
-  console.log("updating single book")
+  console.log("updating single book: "+position)
   let readText = document.querySelector(`[data-read='${position}']`);
   let divStars = document.querySelector(`[data-divStars='${position}']`);
   if (currentBook.read==false){
@@ -151,7 +154,7 @@ function updateBook(currentBook){
 }
 
 
-//ADD BOOK
+//ADD BOOK BUTTON
 btnAdd.addEventListener('click',event => {
   form.style.visibility="visible";
   divStars.style.display="block";
@@ -186,6 +189,7 @@ checkRead.addEventListener("click", function(event){
 //STARS COLOR FUNCTIONALITY
 function colorStars (myStars){
   myStars.forEach((star) => {
+    star.style.color="gray";
     star.addEventListener('click', function(e) {
       currentRating= Number(e.target.getAttribute('data-star'));
       askedRating=currentRating;
@@ -218,28 +222,62 @@ dropOptions.forEach((option) => {
 });
 function orderBooks (orderType){
   console.log("ordering books by: "+orderType);
-  if (orderType=="date" || orderType=="rating"){
-    for (let i in myLibrary){
-      let book =myLibrary[i];
-      let divBook = document.querySelector(`[data-book='${book.index.toString()}']`);
-      if (orderType=="date"){
-        divBook.style.order =`${book.index}`;
-        console.log("book index ",book.index);
-      }
-      else if (orderType=="rating"){
-        divBook.style.order =`${5-book.rating}`;
-      }
-    }
+  let usingLibrary=myLibrary.slice();
+  if (orderType=="title" || orderType=="author"){
+    usingLibrary= usingLibrary.sort((a,b)=> a[orderType].localeCompare(b[orderType])).slice();
   }
-  else if (orderType=="alphabetical"){
-    const orderedLibrary= myLibrary.sort((a,b)=> a.title.localeCompare(b.title));
-    for (let i in orderedLibrary){
-      let book =orderedLibrary[i];
-      let divBook = document.querySelector(`[data-book='${book.index.toString()}']`);
+  for (let i in usingLibrary){
+    let book =usingLibrary[i];
+    let divBook = document.querySelector(`[data-book='${book.index.toString()}']`);
+    if (orderType=="date"){
+      divBook.style.order =`${book.index}`;
+      console.log("book index ",book.index);
+    }
+    else if (orderType=="rating"){
+      divBook.style.order =`${5-book.rating}`;
+    }
+    else if (orderType=="author" ||orderType=="title"){
       divBook.style.order =`${i}`;
     }
   }
 }
+
+
+//SHOW READ/NOT-READ BOOKS
+readButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    let typeButton= button.getAttribute("data-read");
+    console.log("type button: ",typeButton)
+    for (let i in myLibrary){
+      let book = myLibrary[i];
+      let divBook = document.querySelector(`[data-book='${book.index.toString()}']`);
+      if (typeButton=="read"){
+        if (book.read==true){
+          if (showRead==true){
+            divBook.style.display="none";
+          }
+          else {
+            divBook.style.display="flex";
+          }
+        }
+      }
+      else{
+        if (book.read==false){
+          if (showNotRead==true){
+            divBook.style.display="none";
+          }
+          else {
+            divBook.style.display="flex";
+          }
+        }
+      }
+    }
+    showRead= !showRead;
+    showNotRead= !showNotRead;
+  })
+})
+
+
 
 
 //ADD BOOK TO HTML
@@ -253,7 +291,7 @@ function makeBook(thisBook) {
   let book = document.createElement('div');
   book.classList.add('div-book');
   book.setAttribute('data-book', myIndex.toString());
-  book.style.visibility="visible";
+  book.style.display="flex";
   book.style.order=`${myIndex.toString()}`;
   console.log("data-book: ",book.getAttribute('data-book')); 
 

@@ -40,11 +40,20 @@ body {
     left:60px;
 }
 
-/*DROPDOWN*/
-#div-dropdown{
+/*RIGHT-TOP*/
+#div-right-top{
     position:absolute;
     top:35%;
     right:120px;
+}
+/*TOP RIGHT BUTTONS*/
+.btn-top-right{
+    background-color:antiquewhite;
+    color: rgb(143, 104, 54);
+    font-size:20px;
+    width:110px;
+    height:55px;
+    margin:0 10px;
 }
 
 /*LIBRARY*/
@@ -76,6 +85,7 @@ body {
 }
 .book-title{
     font-size:35px;
+    word-break: break-word;
 }
 .div-book-btnDelete{
     position:absolute;
@@ -91,7 +101,7 @@ body {
     transition: all 0.2s ease-in-out;
 }
 .book-btnDelete:hover{
-    transform: scale(0.93);
+    transform: scale(0.93) rotate(-90deg);
 }
 .div-book-toggle{
     position:absolute;
@@ -105,7 +115,7 @@ body {
 #div-book-form{
     background-color: rgb(109, 78, 78);
     color:antiquewhite;
-    position:absolute;
+    position:fixed;
     width:450px;
     height:700px;
     border: 2px black solid;
@@ -179,7 +189,7 @@ input[type='checkbox'] {
 
 /*Rating*/
 #div-rating{
-    position:absolute;
+    position:fixed;
     width:500px;
     height:250px;
     background-color:antiquewhite;
