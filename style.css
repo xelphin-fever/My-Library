@@ -1,12 +1,25 @@
 
+:root {
+    --primary-dark: #ad6a6c;
+    --primary: #d0ada7;
+    --primary-light: #e8d6cb;
+    --secondary-dark-m: #a07043;
+    --secondary-m : #c99b71;
+    --white: rgb(230, 230, 230);
+}
+
 * {
     box-sizing: border-box;
     margin:0;
 }
+::selection {
+    background: var(--secondary-m);
+    color: var(--primary-light);
+  }
 body {
     padding:10px;
-    background-color: antiquewhite;
-    color:rgb(143, 104, 54);
+    background-color: var(--white);
+    color:var(--primary);
 }
 
 /*General Div*/
@@ -17,6 +30,8 @@ body {
 /*Top Div*/
 #div-top{
     position:relative;
+    background-color: var(--primary-light);
+    color: var(--primary-dark);
 }
 
 /*Title*/
@@ -48,12 +63,18 @@ body {
 }
 /*TOP RIGHT BUTTONS*/
 .btn-top-right{
-    background-color:antiquewhite;
-    color: rgb(143, 104, 54);
-    font-size:20px;
-    width:110px;
+    background-color:var(--primary);
+    color: var(--primary-dark);
+    font-size:17px;
+    width:100px;
     height:55px;
-    margin:0 10px;
+    margin:0 15px;
+    box-shadow: 8px 8px rgba(187, 187, 187, 0.534);
+    transition: 0.1s all linear;
+}
+.btn-top-right:hover{
+    transform:scale(0.98) translate(3px,3px);
+    box-shadow: 5px 5px rgba(187, 187, 187, 0.534);
 }
 
 /*LIBRARY*/
@@ -65,10 +86,12 @@ body {
     text-align: center;
 }
 .div-book{
+    background-color: var(--primary-light);
+    color: var(--primary-dark);
     border-radius: 1%;
     position:relative;
     margin:20px 30px;
-    border: 2px rgb(143, 104, 54) solid;
+    border: 2px var(--primary-dark) solid;
     box-shadow: 7px 7px rgba(187, 187, 187, 0.534);
     display:flex;
     flex-direction:column;
@@ -76,6 +99,11 @@ body {
     align-items: center;
     height:400px;
     width:300px;
+    transition: 0.2s all linear;
+}
+.div-book:hover{
+    transform: scale(1.02) translate(-3px, -3px);
+    box-shadow: 10px 10px rgba(187, 187, 187, 0.534);
 }
 .div-book-title-author, .div-book-read-stars{
     display:flex;
@@ -94,11 +122,12 @@ body {
 }
 .book-btnDelete{
     border-radius: 50%;
-    background-color: rgb(143, 104, 54);
-    color:antiquewhite;
+    background-color: var(--secondary-dark-m);
+    color:var(--white);
     width:35px;
     height:35px;
     transition: all 0.2s ease-in-out;
+    font-size:20px;
 }
 .book-btnDelete:hover{
     transform: scale(0.93) rotate(-90deg);
@@ -111,14 +140,15 @@ body {
 
 
 
+
 /*Form*/
 #div-book-form{
-    background-color: rgb(109, 78, 78);
-    color:antiquewhite;
+    background-color: var(--primary-light);
+    color:var(--primary-dark);
     position:fixed;
     width:450px;
     height:700px;
-    border: 2px black solid;
+    border: 2px var(--primary-dark) solid;
     left: 0; 
     right: 0; 
     margin-left: auto; 
@@ -154,16 +184,40 @@ body {
 input[type='checkbox'] {
     width:30px;
     height:30px;
-    background:white;
+    background:var(--primary-light);
     border-radius:5px;
-    border:2px solid #555;
+    border:2px solid var(--primary);
 }
 #btn-submit{
+    background-color: var(--secondary-m);
+    color:var(--white);
     width:200px;
     height:80px;
     font-size: 50px;
+    box-shadow: 9px 9px rgba(187, 187, 187, 0.534);
+    transition: 0.1s all linear;
 }
-
+#btn-submit:hover{
+    transform: scale(0.98) translate(2px, 2px);
+    box-shadow: 5px 5px rgba(187, 187, 187, 0.534);
+}
+.bubble{
+    animation-name:bubble;
+    animation-duration: 0.4s;
+    animation-fill-mode:forwards;
+    animation-timing-function:ease-out;
+}
+@keyframes bubble{
+    0%{
+      transform: scale(0.3);
+    }
+    60%{
+        transform: scale(1.25);
+    }
+    100%{
+        transform: scale(1);
+    }
+}
 
 
 
@@ -176,8 +230,8 @@ input[type='checkbox'] {
     height:5vw;
     border-radius: 50%;
     font-size:50px;
-    background-color:rgb(143, 104, 54);
-    color:antiquewhite;
+    background-color: var(--secondary-dark-m);
+    color: var(--white);
     transition: 0.15s all linear;
 }
 #btn-add:hover{
@@ -192,7 +246,7 @@ input[type='checkbox'] {
     position:fixed;
     width:500px;
     height:250px;
-    background-color:antiquewhite;
+    background-color: var(--primary-light);
     border: 2px rgb(143, 104, 54) solid;
     left: 0; 
     right: 0; 
@@ -213,7 +267,17 @@ input[type='checkbox'] {
 }
 #rating-submit{
     border:2px rgb(143, 104, 54) solid;
-    background-color:antiquewhite;
+    background-color:var(--primary-light);
     color:rgb(143, 104, 54);
     font-size:25px;
+}
+
+
+/*Star*/
+.fa-star{
+    transition: 0.1s all linear;
+}
+.fa-star:hover{
+    transform:scale(1.08) translate(-1.5px,-1.5px);
+    text-shadow: 2px 2px rgba(138, 138, 138, 0.534);
 }

@@ -44,6 +44,33 @@ let myLibrary = [
 let myIndex=0;
 
 
+//LOCAL STORAGE ?????? 
+/*
+if(!localStorage.getItem('localLibrary')) {
+  populateStorage();
+} else {
+  setBooks();
+}
+function populateStorage() {
+  localStorage.setItem('localLibrary', JSON.stringify(myLibrary));
+  setBooks();
+}
+function setBooks() {
+  let jsonString = localStorage.getItem("localLibrary");
+  myLibrary = JSON.parse(jsonString);
+  console.log(myLibrary);
+  printAllBooks();
+}
+
+myLibrary.onchange = populateStorage;
+
+function printAllBooks (){
+  for (let i in myLibrary){
+    let newBook = new Book(myIndex,myLibrary[i].title,myLibrary[i].author,myLibrary[i].read,myLibrary[i].rating);
+    myIndex+=1;
+  }
+}
+*/
 
 //BOOK CONSTRUCTOR
 function Book(index,title,author,read,rating) {
@@ -154,9 +181,10 @@ function updateBook(currentBook){
 }
 
 
-//ADD BOOK BUTTON
+//SHOW FORM
 btnAdd.addEventListener('click',event => {
   form.style.visibility="visible";
+  form.classList.add("bubble");
   divStars.style.display="block";
 });
 
@@ -170,6 +198,7 @@ form.addEventListener("submit", function(event) {
   console.log("book: "+currentTitle+" "+currentAuthor+" "+currentHasRead);
   form.style.visibility="hidden";
   form.reset();
+  form.classList.remove("bubble");
   addBookToLibrary()
 })
 
@@ -189,13 +218,13 @@ checkRead.addEventListener("click", function(event){
 //STARS COLOR FUNCTIONALITY
 function colorStars (myStars){
   myStars.forEach((star) => {
-    star.style.color="gray";
+    star.style.color="#d0ada7";
     star.addEventListener('click', function(e) {
       currentRating= Number(e.target.getAttribute('data-star'));
       askedRating=currentRating;
       myStars.forEach((colorStar)=> {
         if (Number(colorStar.getAttribute('data-star'))<=currentRating){
-          colorStar.style.color="rgb(143, 104, 54)";
+          colorStar.style.color="#aa723d";
         }
         else {
           colorStar.style.color="white";
@@ -255,9 +284,13 @@ readButtons.forEach((button) => {
         if (book.read==true){
           if (showRead==true){
             divBook.style.display="none";
+            button.style.backgroundColor = "#e8d6cb";
+            button.style.color = "#ad6a6c";
           }
           else {
             divBook.style.display="flex";
+            button.style.backgroundColor = "#ad6a6c";
+            button.style.color = "#e8d6cb";
           }
         }
       }
@@ -265,9 +298,13 @@ readButtons.forEach((button) => {
         if (book.read==false){
           if (showNotRead==true){
             divBook.style.display="none";
+            button.style.backgroundColor = "#e8d6cb";
+            button.style.color = "#ad6a6c";
           }
           else {
             divBook.style.display="flex";
+            button.style.backgroundColor = "#ad6a6c";
+            button.style.color = "#e8d6cb";
           }
         }
       }
@@ -330,7 +367,7 @@ function makeBook(thisBook) {
       aStar.classList.add('fa');
       aStar.classList.add('fa-star');
       aStar.classList.add('fa-2x');
-      aStar.style.color="rgb(143, 104, 54)";
+      aStar.style.color="#aa723d";
       divStars.appendChild(aStar);
     }
   }
