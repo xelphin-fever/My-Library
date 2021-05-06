@@ -1,0 +1,31 @@
+{
+  "name": "my-library",
+  "version": "1.0.0",
+  "description": "## Tasked Project tasked by \"The Odin Project\" with some extra features.  ## About My Library is a personal library where the user can keep a record of their books. Information includes : title, author and rating if read. There are options to organize the books by alphabetical order, ratings and entry date.  ## Copied CSS Styles CSS Styles Copied from w3Schools (some changes made): Toggle.css and Dropdown.css",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xelphin-fever/My-Library.git"
+  },
+  "author": "xelphin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xelphin-fever/My-Library/issues"
+  },
+  "homepage": "https://github.com/xelphin-fever/My-Library#readme",
+  "devDependencies": {
+    "webpack": "^5.36.2",
+    "webpack-cli": "^4.7.0"
+  },
+  "dependencies": {
+    "eslint-config-airbnb-base": "^14.2.1"
+  },
+  "prettier": {
+    "singleQuote": true,
+    "printWidth": 150
+  }
+}
