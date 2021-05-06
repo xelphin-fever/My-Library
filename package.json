@@ -26,6 +26,6 @@
   },
   "prettier": {
     "singleQuote": true,
-    "printWidth": 150
+    "printWidth": 100
   }
 }

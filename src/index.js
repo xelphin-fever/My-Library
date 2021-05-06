@@ -57,7 +57,8 @@ myLibrary.onchange = populateStorage;
 
 function printAllBooks (){
   for (let i in myLibrary){
-    let newBook = new Book(myIndex,myLibrary[i].title,myLibrary[i].author,myLibrary[i].read,myLibrary[i].rating);
+    let newBook = new Book(myIndex,myLibrary[i].
+      title,myLibrary[i].author,myLibrary[i].read,myLibrary[i].rating);
     myIndex+=1;
   }
 }
