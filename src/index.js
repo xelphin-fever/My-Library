@@ -210,17 +210,19 @@ function orderBooks(orderType) {
   }
   let i = 0;
   usingLibrary.forEach((book) => {
-    console.log(i);
-    const divBook = document.querySelector(`[data-book='${book.index.toString()}']`);
-    if (orderType === 'date') {
-      divBook.style.order = `${book.index}`;
-      console.log('book index ', book.index);
-    } else if (orderType === 'rating') {
-      divBook.style.order = `${5 - book.rating}`;
-    } else if (orderType === 'author' || orderType === 'title') {
-      divBook.style.order = `${i}`;
+    if (book !== undefined) {
+      console.log(i);
+      const divBook = document.querySelector(`[data-book='${book.index.toString()}']`);
+      if (orderType === 'date') {
+        divBook.style.order = `${book.index}`;
+        console.log('book index ', book.index);
+      } else if (orderType === 'rating') {
+        divBook.style.order = `${5 - book.rating}`;
+      } else if (orderType === 'author' || orderType === 'title') {
+        divBook.style.order = `${i}`;
+      }
+      i += 1;
     }
-    i += 1;
   });
 }
 dropOptions.forEach((option) => {
@@ -237,13 +239,23 @@ arrayReadButtons.map((button) => {
   button.addEventListener('click', () => {
     const typeButton = button.getAttribute('data-read');
     console.log('type button: ', typeButton);
-    let i = 0;
-    myLibrary.forEach(() => {
-      const book = myLibrary[i];
-      const divBook = document.querySelector(`[data-book='${book.index.toString()}']`);
-      if (typeButton === 'read') {
-        if (book.read === true) {
-          if (showRead === true) {
+    myLibrary.forEach((book) => {
+      if (book !== undefined) {
+        const divBook = document.querySelector(`[data-book='${book.index.toString()}']`);
+        if (typeButton === 'read') {
+          if (book.read === true) {
+            if (showRead === true) {
+              divBook.style.display = 'none';
+              newBtn.style.backgroundColor = '#e8d6cb';
+              newBtn.style.color = '#ad6a6c';
+            } else {
+              divBook.style.display = 'flex';
+              newBtn.style.backgroundColor = '#ad6a6c';
+              newBtn.style.color = '#e8d6cb';
+            }
+          }
+        } else if (book.read === false) {
+          if (showNotRead === true) {
             divBook.style.display = 'none';
             newBtn.style.backgroundColor = '#e8d6cb';
             newBtn.style.color = '#ad6a6c';
@@ -253,18 +265,7 @@ arrayReadButtons.map((button) => {
             newBtn.style.color = '#e8d6cb';
           }
         }
-      } else if (book.read === false) {
-        if (showNotRead === true) {
-          divBook.style.display = 'none';
-          newBtn.style.backgroundColor = '#e8d6cb';
-          newBtn.style.color = '#ad6a6c';
-        } else {
-          divBook.style.display = 'flex';
-          newBtn.style.backgroundColor = '#ad6a6c';
-          newBtn.style.color = '#e8d6cb';
-        }
       }
-      i += 1;
     });
     showRead = !showRead;
     showNotRead = !showNotRead;
